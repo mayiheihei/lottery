@@ -8,6 +8,9 @@ import java.net.URLConnection;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * Http请求工具类，当springboot启动的时候需要一定时间，所以第一次启动的延迟时间最好长一些。（未使用）
+ */
 public class HttpConnectionUtil {
 
     // post请求
@@ -40,7 +43,7 @@ public class HttpConnectionUtil {
      * @param body        请求发送内容
      * @return 返回内容
      */
-    public static String requestMethod(String requestType, String urlStr, String body,String charset) {
+    public static String requestMethod(String requestType, String urlStr, String body, String charset) {
 
         // 是否有http正文提交
         boolean isDoInput = false;
@@ -100,7 +103,7 @@ public class HttpConnectionUtil {
             if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 inputStream = httpURLConnection.getInputStream();
                 //此处设置返回的数据编码格式。
-                inputStreamReader = new InputStreamReader(inputStream,charset);
+                inputStreamReader = new InputStreamReader(inputStream, charset);
                 reader = new BufferedReader(inputStreamReader);
 
                 while ((tempLine = reader.readLine()) != null) {
@@ -189,8 +192,10 @@ public class HttpConnectionUtil {
      */
     public static void main(String[] args) throws MalformedURLException {
 
-        System.out.println(requestMethod(HTTP_GET, "http://a.apiplus.net/newly.do?token=t9bc5205d023876b3k&code=bjpk10&format=json",null,"GBK"));
-//        System.out.println(requestMethod(HTTP_GET, "http://q.stock.sohu.com/hisHq?code=cn_600728&start=20170828&end=20170828",null,"UTF-8"));
+        System.out.println(requestMethod(HTTP_GET, "http://a.apiplus.net/newly" +
+                ".do?token=t9bc5205d023876b3k&code=bjpk10&format=json", null, "GBK"));
+//        System.out.println(requestMethod(HTTP_GET, "http://q.stock.sohu
+// .com/hisHq?code=cn_600728&start=20170828&end=20170828",null,"UTF-8"));
 
     }
 }

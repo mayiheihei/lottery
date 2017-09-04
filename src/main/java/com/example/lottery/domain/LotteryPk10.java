@@ -29,8 +29,8 @@ public class LotteryPk10 {
     private String opencodeNo10;//彩票号码10
     private String opentime;//开彩时间
     private Integer opentimestamp;//开彩时间戳（可能是从0开始的时间戳）
-    private String[] opencodeBefore = {opencodeNo1,opencodeNo2,opencodeNo3,opencodeNo4,opencodeNo5};
-    private String[] opencodeAfter= {opencodeNo6,opencodeNo7,opencodeNo8,opencodeNo9,opencodeNo10};
+    private String[] opencodeBefore = {opencodeNo1, opencodeNo2, opencodeNo3, opencodeNo4, opencodeNo5};
+    private String[] opencodeAfter = {opencodeNo6, opencodeNo7, opencodeNo8, opencodeNo9, opencodeNo10};
 
     protected LotteryPk10() {
     }
