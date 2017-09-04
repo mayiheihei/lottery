@@ -7,9 +7,12 @@ import com.example.lottery.domain.Pk10Count;
 import com.example.lottery.repository.LotteryPk10Repository;
 import com.example.lottery.repository.Pk10CountRepository;
 import com.example.lottery.utils.HttpClientUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 
 /**
  * 彩票服务
@@ -18,11 +21,14 @@ import org.springframework.stereotype.Service;
  * @create 2017-09-03 20:28
  */
 @Service
+@Slf4j
 public class LotteryService {
     @Autowired
     private LotteryPk10Repository lotteryPk10Repository;
     @Autowired
     private Pk10CountRepository pk10CountRepository;
+
+    //    private final Logger logger = LoggerFactory.getLogger(LotteryService.class);使用@Slf4j了，lombok类
     private static final String host = "a.apiplus.net/newly.do?token=t9bc5205d023876b3k&code=bjpk10&rows=1&format=json";
 
     @Scheduled(cron = "0 1/4 * * * ?")
@@ -40,21 +46,25 @@ public class LotteryService {
                 String expect = (String) jsonArray.getJSONObject(0).get("expect");
                 String opencode = (String) jsonArray.getJSONObject(0).get("opencode");
                 String[] opencodeArr = parseLottery(opencode);
-//                System.out.println("opencodeArr:" + opencodeArr);
+                //System.out.println("opencodeArr:" + opencodeArr);
                 String opentime = (String) jsonArray.getJSONObject(0).get("opentime");
                 Integer opentimestamp = (Integer) jsonArray.getJSONObject(0).get("opentimestamp");
 
                 LotteryPk10 lotteryPk10 = new LotteryPk10(code, expect, opencodeArr[0], opencodeArr[1], opencodeArr[2],
                         opencodeArr[3], opencodeArr[4], opencodeArr[5], opencodeArr[6], opencodeArr[7], opencodeArr[8],
                         opencodeArr[9], opentime, opentimestamp);
-
+                log.info("lotteryPk10:" + lotteryPk10);
                 //TODO: 判断是否为空
                 if (lotteryPk10Repository.findByOpentimestamp(opentimestamp) == null) {
 
-//                    System.out.println(lotteryPk10.getOpencodeBefore());
+                    //logger.info(lotteryPk10.getOpencodeBefore());
                     //最新数据前5个数
-                    String[] opencodeBefore = lotteryPk10.getOpencodeBefore();
-                    String[] opencodeAfter = lotteryPk10.getOpencodeAfter();
+                    String[] opencodeBefore = {opencodeArr[0], opencodeArr[1], opencodeArr[2],
+                            opencodeArr[3], opencodeArr[4]};
+                    String[] opencodeAfter = {opencodeArr[5], opencodeArr[6], opencodeArr[7], opencodeArr[8],
+                            opencodeArr[9]};
+                    log.info("opencodeBefore" + Arrays.toString(opencodeBefore));
+                    log.info("opencodeAfter" + Arrays.toString(opencodeAfter));
                     //获取历史最新数据
                     LotteryPk10 lotteryPk10His = lotteryPk10Repository.findFirstByOrderByOpentimestampDesc();
 
@@ -67,45 +77,55 @@ public class LotteryService {
                         //如果六号位数组在前五个数里，就把6号位+1
                         Integer numSix = pk10Count.getNumSix() + 1;
                         pk10Count.setNumSix(numSix);
+                        log.info("6号+1");
                     } else {
                         //否则就清零
                         pk10Count.setNumSix(0);
+                        log.info("6号清空");
                     }
 
                     if (isContainCode(opencodeBefore, lotteryPk10His.getOpencodeNo7())) {
                         //如果七号位数组在前五个数里，就把7号位+1
                         Integer numSeven = pk10Count.getNumSeven() + 1;
                         pk10Count.setNumSeven(numSeven);
+                        log.info("7号+1");
                     } else {
                         //否则就清零
                         pk10Count.setNumSeven(0);
+                        log.info("7号0");
                     }
 
                     if (isContainCode(opencodeBefore, lotteryPk10His.getOpencodeNo8())) {
                         //如果八号位数组在前五个数里，就把8号位+1
                         Integer numEight = pk10Count.getNumEight() + 1;
                         pk10Count.setNumEight(numEight);
+                        log.info("8号+1");
                     } else {
                         //否则就清零
                         pk10Count.setNumEight(0);
+                        log.info("8号0");
                     }
 
                     if (isContainCode(opencodeBefore, lotteryPk10His.getOpencodeNo9())) {
                         //如果九号位数组在前五个数里，就把9号位+1
                         Integer numNine = pk10Count.getNumNine() + 1;
                         pk10Count.setNumNine(numNine);
+                        log.info("9号+1");
                     } else {
                         //否则就清零
                         pk10Count.setNumNine(0);
+                        log.info("9号0");
                     }
 
                     if (isContainCode(opencodeBefore, lotteryPk10His.getOpencodeNo10())) {
                         //如果十号位数组在前五个数里，就把10号位+1
                         Integer numTen = pk10Count.getNumTen() + 1;
                         pk10Count.setNumTen(numTen);
+                        log.info("10号+1");
                     } else {
                         //否则就清零
                         pk10Count.setNumTen(0);
+                        log.info("10号0");
                     }
 
                     //判断前五个数
@@ -114,9 +134,11 @@ public class LotteryService {
                         //如果1号位数在前五个数里，就把6号位+1
                         Integer numOne = pk10Count.getNumOne() + 1;
                         pk10Count.setNumOne(numOne);
+                        log.info("1号+1");
                     } else {
                         //否则就清零
                         pk10Count.setNumOne(0);
+                        log.info("1号0");
                     }
 
                     if (isContainCode(opencodeAfter, lotteryPk10His.getOpencodeNo2())) {
@@ -124,9 +146,11 @@ public class LotteryService {
                         //如果1号位数在前五个数里，就把6号位+1
                         Integer numTwo = pk10Count.getNumTwo() + 1;
                         pk10Count.setNumTwo(numTwo);
+                        log.info("2号+1");
                     } else {
                         //否则就清零
                         pk10Count.setNumTwo(0);
+                        log.info("2号0");
                     }
 
                     if (isContainCode(opencodeAfter, lotteryPk10His.getOpencodeNo3())) {
@@ -134,9 +158,11 @@ public class LotteryService {
                         //如果1号位数在前五个数里，就把6号位+1
                         Integer numThree = pk10Count.getNumThree() + 1;
                         pk10Count.setNumThree(numThree);
+                        log.info("3号+1");
                     } else {
                         //否则就清零
                         pk10Count.setNumThree(0);
+                        log.info("3号0");
                     }
 
                     if (isContainCode(opencodeAfter, lotteryPk10His.getOpencodeNo4())) {
@@ -144,9 +170,11 @@ public class LotteryService {
                         //如果1号位数在前五个数里，就把6号位+1
                         Integer numFour = pk10Count.getNumFour() + 1;
                         pk10Count.setNumFour(numFour);
+                        log.info("4号+1");
                     } else {
                         //否则就清零
                         pk10Count.setNumFour(0);
+                        log.info("4号0");
                     }
 
                     if (isContainCode(opencodeAfter, lotteryPk10His.getOpencodeNo5())) {
@@ -154,21 +182,23 @@ public class LotteryService {
                         //如果1号位数在前五个数里，就把6号位+1
                         Integer numFive = pk10Count.getNumFive() + 1;
                         pk10Count.setNumFive(numFive);
+                        log.info("5号+1");
                     } else {
                         //否则就清零
                         pk10Count.setNumFive(0);
+                        log.info("5号0");
                     }
                     pk10CountRepository.save(pk10Count);
                     pk10CountRepository.save(pk10Count);
 
                     //保存最新数据入库
                     lotteryPk10Repository.save(lotteryPk10);
-                    System.out.println("插入数据-------------");
+                    log.info("插入数据-------------");
                 } else {
-                    System.out.println("有重复的！");
+                    log.info("有重复的！");
                 }
             } else {
-                System.out.println("jsonArray数组为空");
+                log.info("jsonArray数组为空");
             }
         } else {
             throw new Exception("获取连接失败");
@@ -214,6 +244,6 @@ public class LotteryService {
     //TODO: 测试方法
     public static void main(String[] args) {
         LotteryService lotteryService = new LotteryService();
-//        lotteryService.savePk10Service();
+        //        lotteryService.savePk10Service();
     }
 }
