@@ -5,14 +5,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- * 北京赛车计数类
+ * 马耳他幸运飞艇计数类
  *
  * @author : 唐明
  * @date : Created in 8:29 2017/9/4
  * @modified By:
  */
+//TODO: 重新写
 @Entity
-public class Pk10Count {
+public class MlaftCount {
     @Id
     @GeneratedValue
     private Integer id;
@@ -36,13 +37,38 @@ public class Pk10Count {
     private Integer NumEightMax;
     private Integer NumNineMax;
     private Integer NumTenMax;
-    public Pk10Count() {
+    public MlaftCount() {
     }
 
+    public MlaftCount(Integer numOne, Integer numTwo, Integer numThree, Integer numFour, Integer numFive, Integer
+            numSix, Integer numSeven, Integer numEight, Integer numNine, Integer numTen, Integer numOneMax, Integer
+            numTwoMax, Integer numThreeMax, Integer numFourMax, Integer numFiveMax, Integer numSixMax, Integer
+            numSevenMax, Integer numEightMax, Integer numNineMax, Integer numTenMax) {
+        NumOne = numOne;
+        NumTwo = numTwo;
+        NumThree = numThree;
+        NumFour = numFour;
+        NumFive = numFive;
+        NumSix = numSix;
+        NumSeven = numSeven;
+        NumEight = numEight;
+        NumNine = numNine;
+        NumTen = numTen;
+        NumOneMax = numOneMax;
+        NumTwoMax = numTwoMax;
+        NumThreeMax = numThreeMax;
+        NumFourMax = numFourMax;
+        NumFiveMax = numFiveMax;
+        NumSixMax = numSixMax;
+        NumSevenMax = numSevenMax;
+        NumEightMax = numEightMax;
+        NumNineMax = numNineMax;
+        NumTenMax = numTenMax;
+    }
 
     @Override
     public String toString() {
-        return "Pk10Count{" +
+        return "MlaftCount{" +
                 "id=" + id +
                 ", NumOne=" + NumOne +
                 ", NumTwo=" + NumTwo +
