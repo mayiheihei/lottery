@@ -13,7 +13,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 马耳他幸运飞艇彩票服务
@@ -262,13 +264,39 @@ public class MlaftService {
     }
 
     /**
-     * 获取马耳他幸运飞艇实体
+     * 获取马耳他幸运飞艇计数器实体
      *
      * @return
      */
     public MlaftCount getMlaftService() {
         return mlaftCountRepository.findFirstData();
     }
+
+    /**
+     * 获取历史最新一期北京赛车
+     *
+     * @return
+     */
+    public Map<String, String> getLastMlaftService() {
+        //获取历史最新数据
+        Mlaft mlaftHis = mlaftRepository.findFirstByOrderByOpentimestampDesc();
+        Map<String, String> map = new HashMap<>();
+        map.put("one", mlaftHis.getOpencodeNo1());
+        map.put("two", mlaftHis.getOpencodeNo2());
+        map.put("three", mlaftHis.getOpencodeNo3());
+        map.put("four", mlaftHis.getOpencodeNo4());
+        map.put("five", mlaftHis.getOpencodeNo5());
+        map.put("six", mlaftHis.getOpencodeNo6());
+        map.put("seven", mlaftHis.getOpencodeNo7());
+        map.put("eight", mlaftHis.getOpencodeNo8());
+        map.put("nine", mlaftHis.getOpencodeNo9());
+        map.put("ten", mlaftHis.getOpencodeNo10());
+        map.put("expect", mlaftHis.getExpect());
+        return map;
+    }
+
+
+
 
 
     /**

@@ -48,6 +48,17 @@ public class LotteryController {
 
 
     /**
+     * 获取历史最新一期马耳他幸运赛艇
+     *
+     * @return
+     */
+    @GetMapping("/mlaft")
+    public Map<String, String> getMlaft() {
+        return mlaftService.getLastMlaftService();
+    }
+
+
+    /**
      * 获取马耳他幸运赛艇当前计数器和当月历史最高数
      *
      * @return
