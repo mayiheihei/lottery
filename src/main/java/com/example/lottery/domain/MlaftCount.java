@@ -37,6 +37,16 @@ public class MlaftCount {
     private Integer NumEightMax;
     private Integer NumNineMax;
     private Integer NumTenMax;
+    private Integer NumOneDayMax;//当天最高
+    private Integer NumTwoDayMax;
+    private Integer NumThreeDayMax;
+    private Integer NumFourDayMax;
+    private Integer NumFiveDayMax;
+    private Integer NumSixDayMax;
+    private Integer NumSevenDayMax;
+    private Integer NumEightDayMax;
+    private Integer NumNineDayMax;
+    private Integer NumTenDayMax;
     public MlaftCount() {
     }
 
@@ -90,6 +100,16 @@ public class MlaftCount {
                 ", NumEightMax=" + NumEightMax +
                 ", NumNineMax=" + NumNineMax +
                 ", NumTenMax=" + NumTenMax +
+                ", NumOneDayMax=" + NumOneDayMax +
+                ", NumTwoDayMax=" + NumTwoDayMax +
+                ", NumThreeDayMax=" + NumThreeDayMax +
+                ", NumFourDayMax=" + NumFourDayMax +
+                ", NumFiveDayMax=" + NumFiveDayMax +
+                ", NumSixDayMax=" + NumSixDayMax +
+                ", NumSevenDayMax=" + NumSevenDayMax +
+                ", NumEightDayMax=" + NumEightDayMax +
+                ", NumNineDayMax=" + NumNineDayMax +
+                ", NumTenDayMax=" + NumTenDayMax +
                 '}';
     }
 
@@ -259,5 +279,85 @@ public class MlaftCount {
 
     public void setNumTenMax(Integer numTenMax) {
         NumTenMax = numTenMax;
+    }
+
+    public Integer getNumOneDayMax() {
+        return NumOneDayMax;
+    }
+
+    public void setNumOneDayMax(Integer numOneDayMax) {
+        NumOneDayMax = numOneDayMax;
+    }
+
+    public Integer getNumTwoDayMax() {
+        return NumTwoDayMax;
+    }
+
+    public void setNumTwoDayMax(Integer numTwoDayMax) {
+        NumTwoDayMax = numTwoDayMax;
+    }
+
+    public Integer getNumThreeDayMax() {
+        return NumThreeDayMax;
+    }
+
+    public void setNumThreeDayMax(Integer numThreeDayMax) {
+        NumThreeDayMax = numThreeDayMax;
+    }
+
+    public Integer getNumFourDayMax() {
+        return NumFourDayMax;
+    }
+
+    public void setNumFourDayMax(Integer numFourDayMax) {
+        NumFourDayMax = numFourDayMax;
+    }
+
+    public Integer getNumFiveDayMax() {
+        return NumFiveDayMax;
+    }
+
+    public void setNumFiveDayMax(Integer numFiveDayMax) {
+        NumFiveDayMax = numFiveDayMax;
+    }
+
+    public Integer getNumSixDayMax() {
+        return NumSixDayMax;
+    }
+
+    public void setNumSixDayMax(Integer numSixDayMax) {
+        NumSixDayMax = numSixDayMax;
+    }
+
+    public Integer getNumSevenDayMax() {
+        return NumSevenDayMax;
+    }
+
+    public void setNumSevenDayMax(Integer numSevenDayMax) {
+        NumSevenDayMax = numSevenDayMax;
+    }
+
+    public Integer getNumEightDayMax() {
+        return NumEightDayMax;
+    }
+
+    public void setNumEightDayMax(Integer numEightDayMax) {
+        NumEightDayMax = numEightDayMax;
+    }
+
+    public Integer getNumNineDayMax() {
+        return NumNineDayMax;
+    }
+
+    public void setNumNineDayMax(Integer numNineDayMax) {
+        NumNineDayMax = numNineDayMax;
+    }
+
+    public Integer getNumTenDayMax() {
+        return NumTenDayMax;
+    }
+
+    public void setNumTenDayMax(Integer numTenDayMax) {
+        NumTenDayMax = numTenDayMax;
     }
 }

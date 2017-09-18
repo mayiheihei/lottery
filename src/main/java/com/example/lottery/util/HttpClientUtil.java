@@ -1,4 +1,4 @@
-package com.example.lottery.utils;
+package com.example.lottery.util;
 
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;

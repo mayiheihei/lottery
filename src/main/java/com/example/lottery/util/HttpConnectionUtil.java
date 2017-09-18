@@ -1,4 +1,4 @@
-package com.example.lottery.utils;
+package com.example.lottery.util;
 
 import java.io.*;
 import java.net.HttpURLConnection;
