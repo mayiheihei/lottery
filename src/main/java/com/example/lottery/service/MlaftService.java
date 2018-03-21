@@ -32,7 +32,8 @@ public class MlaftService {
     @Autowired
     private MlaftCountRepository mlaftCountRepository;
 
-    private static final String host = "a.apiplus.net/newly.do?token=t9bc5205d023876b3k&code=mlaft&rows=1&format=json";
+//    private static final String host = "a.apiplus.net/newly.do?token=t9bc5205d023876b3k&code=mlaft&rows=1&format=json";
+    private static final String host = "e.apiplus.net/newly.do?token=t9bc5205d023876b3k&code=mlaft&rows=1&format=json";
 
     @Scheduled(cron = "40/5 * * * * ?")
     public void saveMlaftService() throws Exception {

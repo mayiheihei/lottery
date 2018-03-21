@@ -31,7 +31,8 @@ public class Pk10Service {
     private Pk10CountRepository pk10CountRepository;
 
     //    private final Logger logger = LoggerFactory.getLogger(LotteryService.class);使用@Slf4j了，lombok类
-    private static final String host = "a.apiplus.net/newly.do?token=t9bc5205d023876b3k&code=bjpk10&rows=1&format=json";
+//    private static final String host = "a.apiplus.net/newly.do?token=t9bc5205d023876b3k&code=bjpk10&rows=1&format=json";
+    private static final String host = "e.apiplus.net/newly.do?token=t9bc5205d023876b3k&code=bjpk10&rows=1&format=json";
 
     @Scheduled(cron = "45/10 * * * * ?")
     public void savePk10Service() throws Exception {
